@@ -1,7 +1,8 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Comment;
 import com.example.demo.model.Task;
+import com.example.demo.model.dto.CommentDto;
+import com.example.demo.model.dto.TaskDto;
 import com.example.demo.service.admin.AdminService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
@@ -23,17 +24,17 @@ public class AdminController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public void createTask(@RequestBody Task task) {
+    public Task createTask(@RequestBody TaskDto taskDto) {
         log.info("Admin: create_task");
-        service.createTask(task);
+        return service.createTask(taskDto);
     }
 
     @PatchMapping("/{taskId}")
     @ResponseStatus(HttpStatus.OK)
     public void updateTask(@PathVariable(name = "taskId") @Positive Long id,
-                           @RequestBody Task task) {
+                           @RequestBody TaskDto taskDto) {
         log.info("Admin: update_task");
-        service.updateTask(id, task);
+        service.updateTask(id, taskDto);
     }
 
     @PatchMapping("/{taskId}/priority/{priority}")
@@ -63,21 +64,15 @@ public class AdminController {
     @PatchMapping("/{taskId}/comment")
     @ResponseStatus(HttpStatus.OK)
     public void giveCommentTask(@PathVariable(name = "taskId") @Positive Long id,
-                                @RequestBody Comment comment) {
+                                @RequestBody CommentDto commentDto) {
         log.info("Admin: give_comment_task");
-        service.giveCommentTask(id, comment);
+        service.giveCommentTask(id, commentDto);
     }
 
     @DeleteMapping("/{taskId}")
     public void deleteTask(@PathVariable(name = "taskId") Long id) {
         log.info("Admin: delete_task");
         service.deleteTask(id);
-    }
-
-    @GetMapping("/{taskId}")
-    public Task getTask(@PathVariable(name = "taskId") @Positive Long id) {
-        log.info("Admin: get_task");
-        return service.getTask(id);
     }
 
     @GetMapping

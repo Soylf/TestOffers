@@ -1,17 +1,16 @@
 package com.example.demo.service.admin;
 
-import com.example.demo.model.Comment;
 import com.example.demo.model.Task;
+import com.example.demo.model.dto.CommentDto;
+import com.example.demo.model.dto.TaskDto;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
 public interface AdminService {
-    void createTask(Task task);
+    Task createTask(TaskDto taskDto);
 
-    void updateTask(Long id, Task task);
-
-    Task getTask(Long id);
+    void updateTask(Long id, TaskDto taskDto);
 
     void deleteTask(Long id);
 
@@ -21,7 +20,7 @@ public interface AdminService {
 
     void updatePerformer(Long taskId, Long userId);
 
-    void giveCommentTask(Long id, Comment comment);
+    void giveCommentTask(Long id, CommentDto commentDto);
 
     List<Task> getTasks(Pageable pageable);
 }

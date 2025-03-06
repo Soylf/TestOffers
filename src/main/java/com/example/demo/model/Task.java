@@ -30,15 +30,11 @@ public class Task {
 
     @ManyToOne
     @JoinColumn(name = "author_id", nullable = false)
-    private User author;
+    private EntityUser author;
 
-    @ManyToMany
-    @JoinTable(
-            name = "task_performers",
-            joinColumns = @JoinColumn(name = "task_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
-    private List<User> performers;
+    @ManyToOne
+    @JoinColumn(name = "performer_id") // Новый внешний ключ для исполнителя
+    private EntityUser performer; // Один исполнитель, а не список
 
     @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
     private List<Comment> comments;
