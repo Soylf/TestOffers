@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.config.util.JwtUtil;
 import com.example.demo.model.EntityUser;
+import com.example.demo.model.enums.Role;
 import com.example.demo.repository.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -38,7 +39,8 @@ public class AuthController {
 
         EntityUser user = new EntityUser();
         user.setEmail(email);
-        user.setPassword(passwordEncoder.encode(password)); // Шифруем пароль
+        user.setPassword(passwordEncoder.encode(password));
+        user.setRole(Role.USER);
 
         userRepository.save(user);
         return "Пользователь зарегистрирован!";

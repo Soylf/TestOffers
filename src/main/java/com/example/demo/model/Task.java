@@ -29,12 +29,12 @@ public class Task {
     private String priority;
 
     @ManyToOne
-    @JoinColumn(name = "author_id", nullable = false)
+    @JoinColumn(name = "author_id")
     private EntityUser author;
 
     @ManyToOne
-    @JoinColumn(name = "performer_id") // Новый внешний ключ для исполнителя
-    private EntityUser performer; // Один исполнитель, а не список
+    @JoinColumn(name = "performer_id")
+    private EntityUser performer;
 
     @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
     private List<Comment> comments;
