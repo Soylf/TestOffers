@@ -1,7 +1,7 @@
-package com.example.demo.model.mapper;
+package com.example.demo.repository.model.mapper;
 
-import com.example.demo.model.Comment;
-import com.example.demo.model.dto.CommentDto;
+import com.example.demo.repository.model.Comment;
+import com.example.demo.repository.model.dto.CommentDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

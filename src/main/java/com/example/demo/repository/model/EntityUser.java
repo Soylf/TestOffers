@@ -1,6 +1,6 @@
-package com.example.demo.model;
+package com.example.demo.repository.model;
 
-import com.example.demo.model.enums.Role;
+import com.example.demo.repository.model.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,19 +21,7 @@ public class EntityUser {
     @Column(nullable = false)
     private String password;
     @Enumerated(EnumType.STRING)
-    private Role role = Role.USER;
-
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Task> tasksByAuthor;
-
-    @ManyToMany
-    @JoinTable(
-            name = "task_performers",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "task_id")
-    )
-    private List<Task> performers;
-
+    private Role role;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Comment> comments;
 }

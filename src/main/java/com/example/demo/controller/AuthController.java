@@ -1,8 +1,8 @@
 package com.example.demo.controller;
 
-import com.example.demo.config.util.JwtUtil;
-import com.example.demo.model.EntityUser;
-import com.example.demo.model.enums.Role;
+import com.example.demo.config.component.JwtUtil;
+import com.example.demo.repository.model.EntityUser;
+import com.example.demo.repository.model.enums.Role;
 import com.example.demo.repository.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -32,15 +32,17 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String register(@RequestParam String email, @RequestParam String password) {
+    public String register(@RequestParam String email, @RequestParam String password, @RequestParam(defaultValue = "USER") String role) {
         if (userRepository.findByEmail(email).isPresent()) {
             return "Пользователь уже существует!";
         }
+        Role userRole = (role == null || role.isEmpty()) ? Role.ADMIN : Role.valueOf(role.toUpperCase());
+
 
         EntityUser user = new EntityUser();
         user.setEmail(email);
         user.setPassword(passwordEncoder.encode(password));
-        user.setRole(Role.USER);
+        user.setRole(userRole);
 
         userRepository.save(user);
         return "Пользователь зарегистрирован!";

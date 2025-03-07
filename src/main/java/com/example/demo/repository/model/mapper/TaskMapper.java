@@ -1,7 +1,7 @@
-package com.example.demo.model.mapper;
+package com.example.demo.repository.model.mapper;
 
-import com.example.demo.model.Task;
-import com.example.demo.model.dto.TaskDto;
+import com.example.demo.repository.model.Task;
+import com.example.demo.repository.model.dto.TaskDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

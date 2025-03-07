@@ -1,11 +1,12 @@
 package com.example.demo.service.admin;
 
-import com.example.demo.model.Comment;
-import com.example.demo.model.EntityUser;
-import com.example.demo.model.Task;
-import com.example.demo.model.dto.CommentDto;
-import com.example.demo.model.dto.TaskDto;
-import com.example.demo.model.mapper.TaskMapper;
+import com.example.demo.error.exception.SomethingWentWrongException;
+import com.example.demo.repository.model.Comment;
+import com.example.demo.repository.model.EntityUser;
+import com.example.demo.repository.model.Task;
+import com.example.demo.repository.model.dto.CommentDto;
+import com.example.demo.repository.model.dto.TaskDto;
+import com.example.demo.repository.model.mapper.TaskMapper;
 import com.example.demo.repository.CommentRepository;
 import com.example.demo.repository.TaskRepository;
 import com.example.demo.repository.UserRepository;
@@ -27,8 +28,11 @@ public class AdminServiceImpl implements AdminService{
     private final TaskRepository taskRepository;
 
     @Override
-    public Task createTask(TaskDto taskDto) {
-        return taskRepository.save(TaskMapper.MAPPER.fromDto(taskDto));
+    public Task createTask(TaskDto taskDto,String email) {
+        Task task = TaskMapper.MAPPER.fromDto(taskDto);
+        task.setAuthor(userRepository.findByEmail(email)
+                .orElseThrow(() -> new SomethingWentWrongException("Пользователь не найден")));
+        return taskRepository.save(task);
     }
 
     @Override
@@ -40,7 +44,7 @@ public class AdminServiceImpl implements AdminService{
         }
         if (taskDto.getAuthorId() != null) {
             EntityUser newAuthor = userRepository.findById(taskDto.getAuthorId())
-                    .orElseThrow(() -> new EntityNotFoundException("Такого пользователя нет"));
+                    .orElseThrow(() -> new SomethingWentWrongException("Такого пользователя нет"));
             foundTask.setAuthor(newAuthor);
         }
 
@@ -51,7 +55,7 @@ public class AdminServiceImpl implements AdminService{
     public void updatePerformer(Long taskId, Long userId) {
         Task task = getTask(taskId);
         EntityUser user = userRepository.findById(userId)
-                .orElseThrow(()-> new EntityNotFoundException(String.format("Пользователь %s не найден", userId)));
+                .orElseThrow(()-> new SomethingWentWrongException(String.format("Пользователь %s не найден", userId)));
 
         task.setPerformer(user);
         taskRepository.save(task);
@@ -93,6 +97,6 @@ public class AdminServiceImpl implements AdminService{
 
     private Task getTask(Long id) {
         return taskRepository.findById(id)
-                .orElseThrow(()-> new EntityNotFoundException(String.format("Задача %s не найдена", id)));
+                .orElseThrow(()-> new SomethingWentWrongException(String.format("Задача %s не найдена", id)));
     }
 }

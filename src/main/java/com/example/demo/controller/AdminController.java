@@ -1,14 +1,17 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Task;
-import com.example.demo.model.dto.CommentDto;
-import com.example.demo.model.dto.TaskDto;
+import com.example.demo.controller.validators.EnumValidation;
+import com.example.demo.repository.model.Task;
+import com.example.demo.repository.model.dto.CommentDto;
+import com.example.demo.repository.model.dto.TaskDto;
+import com.example.demo.repository.model.enums.Priority;
+import com.example.demo.repository.model.enums.Status;
 import com.example.demo.service.admin.AdminService;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -24,9 +27,10 @@ public class AdminController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public Task createTask(@RequestBody TaskDto taskDto) {
+    public Task createTask(@RequestParam String email,
+                           @RequestBody TaskDto taskDto) {
         log.info("Admin: create_task");
-        return service.createTask(taskDto);
+        return service.createTask(taskDto,email);
     }
 
     @PatchMapping("/{taskId}")
@@ -40,7 +44,7 @@ public class AdminController {
     @PatchMapping("/{taskId}/priority/{priority}")
     @ResponseStatus(HttpStatus.OK)
     public void setPriorityTask(@PathVariable(name = "taskId") @Positive Long id,
-                                @PathVariable(name = "priority") @Valid String priority) {
+                                @PathVariable(name = "priority") @EnumValidation(enumClass = Priority.class) String priority) {
         log.info("admin: set_priority_task");
         service.setPriorityTask(id, priority);
     }
@@ -48,7 +52,7 @@ public class AdminController {
     @PatchMapping("/{taskId}/status/{status}")
     @ResponseStatus(HttpStatus.OK)
     public void setStatusTask(@PathVariable(name = "taskId") @Positive Long id,
-                              @PathVariable(name = "status") @Valid String status) {
+                              @PathVariable(name = "status") @EnumValidation(enumClass = Status.class) String status) {
         log.info("Admin: set_status_task");
         service.setStatusTask(id, status);
     }
@@ -76,7 +80,7 @@ public class AdminController {
     }
 
     @GetMapping
-    public List<Task> getTasks(@PageableDefault(size = 20) Pageable pageable) {
+    public List<Task> getTasks(@PageableDefault(size = 20, sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
         log.info("Admin: get_tasks");
         return service.getTasks(pageable);
     }

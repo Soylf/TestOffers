@@ -1,6 +1,6 @@
 package com.example.demo.service.auth;
 
-import com.example.demo.model.EntityUser;
+import com.example.demo.repository.model.EntityUser;
 import org.springframework.security.core.userdetails.User;
 import com.example.demo.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
