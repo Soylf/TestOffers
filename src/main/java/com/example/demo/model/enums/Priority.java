@@ -1,4 +1,4 @@
-package com.example.demo.repository.model.enums;
+package com.example.demo.model.enums;
 
 import lombok.Getter;
 

@@ -1,6 +1,6 @@
-package com.example.demo.repository.model;
+package com.example.demo.model.entity;
 
-import com.example.demo.repository.model.enums.Role;
+import com.example.demo.model.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
 

@@ -1,16 +1,15 @@
 package com.example.demo.service.admin;
 
 import com.example.demo.error.exception.SomethingWentWrongException;
-import com.example.demo.repository.model.Comment;
-import com.example.demo.repository.model.EntityUser;
-import com.example.demo.repository.model.Task;
-import com.example.demo.repository.model.dto.CommentDto;
-import com.example.demo.repository.model.dto.TaskDto;
-import com.example.demo.repository.model.mapper.TaskMapper;
+import com.example.demo.model.entity.Comment;
+import com.example.demo.model.entity.EntityUser;
+import com.example.demo.model.entity.Task;
+import com.example.demo.model.dto.CommentDto;
+import com.example.demo.model.dto.TaskDto;
+import com.example.demo.model.mapper.TaskMapper;
 import com.example.demo.repository.CommentRepository;
+import com.example.demo.repository.EntityUserRepository;
 import com.example.demo.repository.TaskRepository;
-import com.example.demo.repository.UserRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,7 +23,7 @@ import java.util.List;
 @Transactional
 public class AdminServiceImpl implements AdminService{
     private final CommentRepository commentRepository;
-    private final UserRepository userRepository;
+    private final EntityUserRepository userRepository;
     private final TaskRepository taskRepository;
 
     @Override

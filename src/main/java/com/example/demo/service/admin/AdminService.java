@@ -1,8 +1,8 @@
 package com.example.demo.service.admin;
 
-import com.example.demo.repository.model.Task;
-import com.example.demo.repository.model.dto.CommentDto;
-import com.example.demo.repository.model.dto.TaskDto;
+import com.example.demo.model.entity.Task;
+import com.example.demo.model.dto.CommentDto;
+import com.example.demo.model.dto.TaskDto;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;

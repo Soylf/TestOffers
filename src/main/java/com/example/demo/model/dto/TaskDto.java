@@ -1,4 +1,4 @@
-package com.example.demo.repository.model.dto;
+package com.example.demo.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CommentDto {
+public class TaskDto {
     private String description;
-    private boolean adminComment;
-    private Long userId;
-    private Long taskId;
+    private String status;
+    private String priority;
+    private Long authorId;
 }

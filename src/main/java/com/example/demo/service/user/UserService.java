@@ -1,6 +1,6 @@
 package com.example.demo.service.user;
 
-import com.example.demo.repository.model.dto.CommentDto;
+import com.example.demo.model.dto.CommentDto;
 
 public interface UserService {
     void setStatus(String email, String status, Long id) throws Exception;

@@ -1,14 +1,13 @@
 package com.example.demo.service.user;
 
 import com.example.demo.error.exception.SomethingWentWrongException;
-import com.example.demo.repository.model.Comment;
-import com.example.demo.repository.model.EntityUser;
-import com.example.demo.repository.model.Task;
-import com.example.demo.repository.model.dto.CommentDto;
+import com.example.demo.model.entity.Comment;
+import com.example.demo.model.entity.EntityUser;
+import com.example.demo.model.entity.Task;
+import com.example.demo.model.dto.CommentDto;
 import com.example.demo.repository.CommentRepository;
+import com.example.demo.repository.EntityUserRepository;
 import com.example.demo.repository.TaskRepository;
-import com.example.demo.repository.UserRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class UserServiceImpl implements UserService{
     private final CommentRepository commentRepository;
-    private final UserRepository userRepository;
+    private final EntityUserRepository userRepository;
     private final TaskRepository taskRepository;
 
     @Override

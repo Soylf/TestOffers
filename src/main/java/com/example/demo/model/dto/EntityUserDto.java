@@ -1,6 +1,6 @@
-package com.example.demo.repository.model.dto;
+package com.example.demo.model.dto;
 
-import com.example.demo.repository.model.enums.Role;
+import com.example.demo.model.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
