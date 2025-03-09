@@ -1,4 +1,4 @@
-package com.example.demo.service.auth;
+package com.example.demo.service.details;
 
 import com.example.demo.model.entity.EntityUser;
 import com.example.demo.repository.EntityUserRepository;
