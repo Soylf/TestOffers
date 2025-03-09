@@ -1,6 +1,5 @@
 package com.example.demo;
 
-
 import com.example.demo.config.component.JwtUtil;
 import com.example.demo.controller.AuthController;
 import com.example.demo.repository.EntityUserRepository;
@@ -11,8 +10,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -22,7 +19,6 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class ControllerTests {
-    private static final Logger log = LoggerFactory.getLogger(ControllerTests.class);
     @Mock
     private EntityUserRepository userRepository;
 
